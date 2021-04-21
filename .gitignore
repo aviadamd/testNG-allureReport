@@ -3,4 +3,10 @@
 /.png
 /.html
 allure-report/*
-/target
+test-output/*
+target/*
+report.json
+testng.xml
+.classpath
+.project
+.settings/
