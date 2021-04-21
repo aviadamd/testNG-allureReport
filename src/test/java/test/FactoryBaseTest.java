@@ -21,8 +21,7 @@ public class FactoryBaseTest extends Base {
     public void beforeClass() {
         driverManager = DriverManagerFactory.getManager(getProperty.platformType);
         driver = driverManager.getDriver();
-        InitElementsManager elements = new InitElementsManager();
-        elements.initElements(driver);
+        new InitElementsManager().initElements(driver);
     }
 
     @AfterClass(description = "quit sessions")
