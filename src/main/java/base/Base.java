@@ -26,7 +26,6 @@ public class Base {
     public static ImageDiff imageDiff;
     public ImageDiffer imageDiffer = new ImageDiffer();
 
-
     @BeforeClass
     public void initClass() {
         String path = "/src/main/resources/config.properties";
