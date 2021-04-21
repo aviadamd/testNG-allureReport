@@ -1,12 +1,15 @@
 package test.flightPageRegistration.components;
 
+import base.driverManager.InitDrivers.web.WebConditions;
 import lombok.extern.slf4j.Slf4j;
 import test.FactoryBaseTest;
 
 @Slf4j
-public class RegistrationComponent extends FactoryBaseTest {
+public class RegistrationComponent extends FactoryBaseTest implements WebConditions {
 
-    public void landingPage() {
+    @Override
+    public void goTo() {
+        navigateToUrl(getProperty.url);
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
     }
 
@@ -25,4 +28,5 @@ public class RegistrationComponent extends FactoryBaseTest {
         utilities.uiActions()
                 .click(flightUi.registrationPage.submitBtn);
     }
+
 }

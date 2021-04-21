@@ -6,7 +6,7 @@ import test.FactoryBaseTest;
 @Slf4j
 public class RegistrationConfirmationComponent extends FactoryBaseTest {
 
-    public void goToFlightDetailsPage() {
+    public void goToFlightDetailsSignLink() {
         utilities.uiActions().elementPresented(flightUi.registrationConfirmationPage.signinLink,5);
         utilities.uiActions().click(flightUi.registrationConfirmationPage.signinLink);
     }

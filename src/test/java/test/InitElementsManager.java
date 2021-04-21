@@ -14,7 +14,6 @@ public class InitElementsManager extends FactoryBaseTest {
             if (driver instanceof AndroidDriver<?>) {
                 aManUi = new AccountManagementUi(driver);
             } else if (driver instanceof ChromeDriver || driver instanceof FirefoxDriver) {
-                navigateToUrl(getProperty.url);
                 flightUi = new FlightUi(driver);
             } else throw new RuntimeException("error driver initiation");
         } else throw new RuntimeException("driver is null");
