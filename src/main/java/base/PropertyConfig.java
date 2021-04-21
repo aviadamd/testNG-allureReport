@@ -15,6 +15,7 @@ public class PropertyConfig {
     public String nodeJs;
     public String appPath;
     public String hubHost;
+    public String mitProxyPath;
     private static Properties properties;
 
     @SneakyThrows
@@ -32,7 +33,7 @@ public class PropertyConfig {
         nodeJs = setProperties("nodeJs");
         appPath = setProperties("appPath");
         hubHost = setProperties("hobHost");
-
+        mitProxyPath = setProperties("mitProxyPath");
         fileInputStream.close();
     }
 

@@ -1,5 +1,6 @@
 package base.driverManager.InitDrivers.android;
 
+import base.Base;
 import base.driverManager.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -9,10 +10,10 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import io.appium.mitmproxy.InterceptedMessage;
 import io.appium.mitmproxy.MitmproxyJava;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+@Slf4j
 @Description("use as a class that extends DriverManager abstract class template")
 public class AndroidDriverManager extends DriverManager {
 
-    private MitmproxyJava proxy;
+    private static final ThreadLocal<MitmproxyJava> proxy = new ThreadLocal<>();
     public static List<InterceptedMessage> messages = new ArrayList<>();
 
     @Override
@@ -39,7 +41,7 @@ public class AndroidDriverManager extends DriverManager {
     protected void stopDriver() {
         driver.quit();
         server.stop();
-        if (proxy != null) proxy.stop();
+        proxy.remove();
     }
 
     private static WebDriver startAppiumServer() {
@@ -71,21 +73,15 @@ public class AndroidDriverManager extends DriverManager {
 
     private void startProxy() {
         try {
-
-            int mitProxyPort = 8081;
-            String dumpPath = "C:\\Program Files (x86)\\mitmproxy\\bin\\mitmdump";
-            proxy = new MitmproxyJava(dumpPath, (InterceptedMessage proxy) -> {
+            proxy.set(new MitmproxyJava(getProperty.mitProxyPath,(InterceptedMessage proxy) -> {
                 System.out.println("request " + proxy.getRequest().getUrl());
                 System.out.println("response " + proxy.getResponse().getStatusCode());
                 messages.add(proxy);
                 return proxy;
-            }, mitProxyPort, null);
-            proxy.start();
-
+            }, 8081, null));
+            proxy.get().start();
         } catch (TimeoutException | IOException e) {
-           System.out.println(e.getMessage());
+           log.error(e.getMessage());
         }
-
     }
-
 }
