@@ -11,11 +11,21 @@ public class InitElementsManager extends FactoryBaseTest {
 
     public void initElements(WebDriver driver) {
         if (driver != null) {
-            if (driver instanceof AndroidDriver<?>) {
+            if (isAndroid(driver)) {
                 aManUi = new AccountManagementUi(driver);
-            } else if (driver instanceof ChromeDriver || driver instanceof FirefoxDriver) {
+            } else if (isWeb(driver)) {
                 flightUi = new FlightUi(driver);
-            } else throw new RuntimeException("error driver initiation");
+            } else {
+                throw new RuntimeException("driver initiation error");
+            }
         } else throw new RuntimeException("driver is null");
+    }
+
+    private boolean isAndroid(WebDriver driver) {
+        return driver instanceof AndroidDriver<?>;
+    }
+
+    private boolean isWeb(WebDriver driver) {
+        return driver instanceof ChromeDriver || driver instanceof FirefoxDriver;
     }
 }

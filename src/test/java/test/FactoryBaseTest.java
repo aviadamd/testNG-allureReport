@@ -27,7 +27,6 @@ public class FactoryBaseTest extends Base {
 
     @AfterClass(description = "quit sessions")
     public void afterClass() {
-
         driverManager.quitDriver();
     }
 }
