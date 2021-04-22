@@ -31,6 +31,5 @@ public class  BookFlightTest extends FactoryBaseTest {
     @Test(priority = 2, dependsOnMethods = "registrationPage")
     public void registrationConfirmationPage() {
         registrationConfirmationPage.goToFlightDetailsSignLink();
-        utilities.uiActions().click(flightUi.registrationPage.submitBtn);
     }
 }
