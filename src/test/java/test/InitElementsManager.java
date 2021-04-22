@@ -1,7 +1,6 @@
 package test;
 
 import io.appium.java_client.android.AndroidDriver;
-import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +13,6 @@ import test.flightPageRegistration.FlightUi;
 public class InitElementsManager extends FactoryBaseTest implements InitElements {
 
     @Override
-    @Description("init the {0} and init elements before the test")
     public void initElements(WebDriver driver) {
         try {
             if (isAndroidDriver(driver)) {

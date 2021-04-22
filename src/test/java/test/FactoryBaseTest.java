@@ -5,10 +5,8 @@ import base.anontations.Author;
 import base.driverManager.DriverManager;
 import base.driverManager.DriverManagerFactory;
 import io.qameta.allure.Description;
-import listeners.AllureListener;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
 
