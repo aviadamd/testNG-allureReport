@@ -4,7 +4,7 @@ import base.Base;
 import base.anontations.Author;
 import base.driverManager.DriverManager;
 import base.driverManager.DriverManagerFactory;
-import io.qameta.allure.Step;
+import io.qameta.allure.Description;
 import listeners.AllureListener;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -20,16 +20,16 @@ public class FactoryBaseTest extends Base {
     public static FlightUi flightUi;
     public static AccountManagementUi aManUi;
 
-    @Step("start session")
     @BeforeClass(description = "start sessions")
+    @Description(value = "start session")
     public void beforeClass() {
         driverManager = DriverManagerFactory.getManager(getProperty.platformType);
         driver = driverManager.getDriver();
         new InitElementsManager().initElements(driver);
     }
 
-    @Step("quit session")
     @AfterClass(description = "quit sessions")
+    @Description(value = "quit session")
     public void afterClass() {
         driverManager.quitDriver();
     }

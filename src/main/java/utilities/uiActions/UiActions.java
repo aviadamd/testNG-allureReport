@@ -1,16 +1,13 @@
 package utilities.uiActions;
 
 import base.Base;
-
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,14 +29,22 @@ import java.util.function.Consumer;
 public class UiActions extends Base {
 
     public void perform(String text, BiConsumer<UiActions, Verifications> actionsConsumer) {
-        log.info("{} action [{}]", text, "");
-        actionsConsumer.accept(utilities.uiActions(), utilities.verifications());
+        try {
+            log.info("{} action [{}]", text, "");
+            actionsConsumer.accept(utilities.uiActions(), utilities.verifications());
+        } catch (WebDriverException webDriverException) {
+            log.error(webDriverException.getMessage());
+        }
     }
 
-
+    @Description("perform {0} , get {1} action")
     public void perform(String text, Consumer<UiUtilitiesObjects> actionsConsumer) {
-        log.info("{} action [{}]", text, "");
-        actionsConsumer.accept(utilities.uiUtilitiesObjects());
+        try {
+            log.info("{} action [{}]", text, "");
+            actionsConsumer.accept(utilities.uiUtilitiesObjects());
+        } catch (WebDriverException webDriverException) {
+            log.error(webDriverException.getMessage());
+        }
     }
 
     public void click(WebElement element) {

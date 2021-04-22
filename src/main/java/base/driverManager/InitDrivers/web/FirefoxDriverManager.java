@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Description;
 
 import java.util.function.Supplier;
 
+import static base.driverManager.InitDrivers.web.SharedWebManager.seleniumProxy;
+
 @Description("use as a class that extends DriverManager abstract class template")
 public class FirefoxDriverManager extends DriverManager {
 
@@ -23,14 +25,13 @@ public class FirefoxDriverManager extends DriverManager {
 
     @Override
     protected void stopDriver() {
-        new SharedWebManager().stopProxy();
+        SharedWebManager.stopProxy();
         driver.quit();
     }
 
     private final Supplier<WebDriver> firefoxDriverSupplier = () -> {
-        Proxy seleniumProxy = seleniumProxy();
         WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver(firefoxOptions(seleniumProxy));
+        driver = new FirefoxDriver(firefoxOptions(seleniumProxy()));
         return driver;
     };
 
@@ -41,7 +42,8 @@ public class FirefoxDriverManager extends DriverManager {
         firefoxOptions.addArguments("disable-infobars");
         firefoxOptions.addArguments("start-maximized");
         DesiredCapabilities seleniumCapabilities = new DesiredCapabilities();
-        seleniumCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        if (getProperty.isRunProxy.equals("true"))
+            seleniumCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
         seleniumCapabilities = DesiredCapabilities.firefox();
         seleniumCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         firefoxOptions.merge(seleniumCapabilities);

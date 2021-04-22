@@ -15,6 +15,7 @@ public class PropertyConfig {
     public String nodeJs;
     public String appPath;
     public String hubHost;
+    public String isRunProxy;
     public String mitProxyPath;
     private static Properties properties;
 
@@ -34,6 +35,7 @@ public class PropertyConfig {
         appPath = setProperties("appPath");
         hubHost = setProperties("hobHost");
         mitProxyPath = setProperties("mitProxyPath");
+        isRunProxy = setProperties("isRunProxy");
         fileInputStream.close();
     }
 

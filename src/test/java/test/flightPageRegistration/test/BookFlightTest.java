@@ -1,11 +1,14 @@
 package test.flightPageRegistration.test;
 
+import listeners.AllureListener;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.components.RegistrationComponent;
 import test.flightPageRegistration.components.RegistrationConfirmationComponent;
 
+@Listeners(AllureListener.class)
 public class BookFlightTest extends FactoryBaseTest {
 
     private RegistrationComponent registrationComponent;
@@ -19,7 +22,7 @@ public class BookFlightTest extends FactoryBaseTest {
 
     @Test(priority = 1)
     public void registrationPage() {
-        registrationComponent.goTo();
+        registrationComponent.goTo(getProperty.url);
         registrationComponent.enterUserDetails("selenium", "docker");
         registrationComponent.enterUserCredentials("selenium", "docker");
         registrationComponent.submit();

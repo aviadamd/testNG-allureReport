@@ -9,9 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
-
 import java.util.function.Supplier;
-
+import static base.driverManager.InitDrivers.web.SharedWebManager.seleniumProxy;
 import static java.util.Collections.singletonList;
 
 @Description("use as a class that extends DriverManager abstract class template")
@@ -25,14 +24,13 @@ public class ChromeDriverManager extends DriverManager {
 
     @Override
     protected void stopDriver() {
-        new SharedWebManager().stopProxy();
+        SharedWebManager.stopProxy();
         driver.quit();
     }
 
     private final Supplier<WebDriver> chromeDriverSupplier = () -> {
-        Proxy seleniumProxy = seleniumProxy();
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(chromeOptions(seleniumProxy));
+        driver = new ChromeDriver(chromeOptions(seleniumProxy()));
         return driver;
     };
 
@@ -45,7 +43,8 @@ public class ChromeDriverManager extends DriverManager {
         options.setExperimentalOption("useAutomationExtension", false);
         options.setExperimentalOption("excludeSwitches", singletonList("enable-automation"));
         DesiredCapabilities seleniumCapabilities = new DesiredCapabilities();
-        seleniumCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        if (getProperty.isRunProxy.equals("true"))
+            seleniumCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
         seleniumCapabilities = DesiredCapabilities.chrome();
         seleniumCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         options.merge(seleniumCapabilities);
