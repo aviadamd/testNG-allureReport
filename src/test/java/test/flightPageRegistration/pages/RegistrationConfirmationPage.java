@@ -7,7 +7,7 @@ import pagesInit.InitWebPages;
 
 public class RegistrationConfirmationPage extends InitWebPages {
 
-    public RegistrationConfirmationPage(WebDriver driver){
+    public RegistrationConfirmationPage(WebDriver driver) {
         super(driver);
     }
 

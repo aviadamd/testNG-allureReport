@@ -12,11 +12,12 @@ import org.openqa.selenium.WebDriver;
 import java.net.InetAddress;
 import java.util.Iterator;
 
-public abstract class DriverManager extends Base {
+public abstract class DriverManager extends Base implements Manager {
 
     protected abstract void createDriver();
     protected abstract void stopDriver();
 
+    @Override
     public WebDriver getDriver() {
         if (driver == null) {
             createDriver();
@@ -24,6 +25,7 @@ public abstract class DriverManager extends Base {
         return driver;
     }
 
+    @Override
     public void quitDriver() {
         if (driver != null) {
             stopDriver();

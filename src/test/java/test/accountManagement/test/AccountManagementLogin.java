@@ -17,5 +17,19 @@ public class AccountManagementLogin extends FactoryBaseTest {
     @Test
     public void loginTest() {
         loginComponent.loadLoginPage();
+        utilities.uiActions().perform("create login test", (action, ver) -> {
+            if (action.elementPresented(aManUi.loginPage.onBoardingPreview_nextTime,5)) {
+                action.click(aManUi.loginPage.onBoardingPreview_nextTime);
+            }
+            ver.load(aManUi.loginPage.mainView);
+        });
+
+        utilities.uiActions().perform("create another test",(actions) -> {
+            if (actions.uiActions().elementPresented(aManUi.loginPage.onBoardingPreview_nextTime,5)) {
+                actions.uiActions().click(aManUi.loginPage.onBoardingPreview_nextTime);
+            }
+            actions.verifications().load(aManUi.loginPage.mainView);
+        });
     }
+
 }
