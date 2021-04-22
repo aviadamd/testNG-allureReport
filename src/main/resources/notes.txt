@@ -1,1 +1,2 @@
-allure serve target/allure-results - open allure server test result
+open allure server test result
+allure serve target/allure-results
