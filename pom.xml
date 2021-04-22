@@ -178,7 +178,7 @@
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
+                        <version>1.9.6</version>
                     </dependency>
                 </dependencies>
             </plugin>

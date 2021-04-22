@@ -3,11 +3,14 @@ package test.accountManagement.pages;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pagesInit.InitMobilePages;
+import pagesInit.InitPages;
+import pagesInit.PageType;
 
-public class LoginPage extends InitMobilePages {
+public class LoginPage extends InitPages {
 
-    public LoginPage(WebDriver driver) { super(driver); }
+    public LoginPage(WebDriver driver) {
+        super(PageType.MOBILE, driver);
+    }
 
     private final String appId = "com.ideomobile.hapoalim:id/";
 

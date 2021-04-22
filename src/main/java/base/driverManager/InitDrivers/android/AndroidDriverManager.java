@@ -41,7 +41,7 @@ public class AndroidDriverManager extends DriverManager {
     protected void stopDriver() {
         driver.quit();
         server.stop();
-        proxy.remove();
+        stopProxy();
     }
 
     private static WebDriver startAppiumServer() {
@@ -73,15 +73,23 @@ public class AndroidDriverManager extends DriverManager {
 
     private void startProxy() {
         try {
-            proxy.set(new MitmproxyJava(getProperty.mitProxyPath,(InterceptedMessage proxy) -> {
-                System.out.println("request " + proxy.getRequest().getUrl());
-                System.out.println("response " + proxy.getResponse().getStatusCode());
-                messages.add(proxy);
-                return proxy;
-            }, 8081, null));
-            proxy.get().start();
+            if (getProperty.isRunProxy.equals("true")) {
+                proxy.set(new MitmproxyJava(getProperty.mitProxyPath, (InterceptedMessage proxy) -> {
+                    System.out.println("request " + proxy.getRequest().getUrl());
+                    System.out.println("response " + proxy.getResponse().getStatusCode());
+                    messages.add(proxy);
+                    return proxy;
+                }, 8081, null));
+                proxy.get().start();
+            }
         } catch (TimeoutException | IOException e) {
            log.error(e.getMessage());
+        }
+    }
+
+    private void stopProxy() {
+        if (getProperty.isRunProxy.equals("true")) {
+            proxy.remove();
         }
     }
 }

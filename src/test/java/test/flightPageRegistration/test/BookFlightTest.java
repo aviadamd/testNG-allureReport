@@ -9,7 +9,7 @@ import test.flightPageRegistration.components.RegistrationComponent;
 import test.flightPageRegistration.components.RegistrationConfirmationComponent;
 
 @Listeners(AllureListener.class)
-public class BookFlightTest extends FactoryBaseTest {
+public class  BookFlightTest extends FactoryBaseTest {
 
     private RegistrationComponent registrationComponent;
     private RegistrationConfirmationComponent registrationConfirmationPage;

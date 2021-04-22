@@ -13,7 +13,6 @@ import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
 
 @Author(desc = "aviad")
-@Listeners(AllureListener.class)
 public class FactoryBaseTest extends Base {
 
     private DriverManager driverManager;
