@@ -2,8 +2,8 @@ package test;
 
 import base.Base;
 import base.anontations.Author;
-import base.driverManager.factory.DriverManager;
-import base.driverManager.factory.DriverManagerFactory;
+import base.driverManager.DriverManager;
+import base.driverManager.DriverManagerFactory;
 import io.qameta.allure.Description;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
