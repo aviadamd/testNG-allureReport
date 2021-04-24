@@ -1,28 +1,36 @@
-package base.driverManager;
+package base.driverManager.factory;
 
 import base.Base;
 import base.driverManager.InitDrivers.RemoteDriverManager;
 import base.driverManager.InitDrivers.android.AndroidDriverManager;
 import base.driverManager.InitDrivers.web.ChromeDriverManager;
 import base.driverManager.InitDrivers.web.FirefoxDriverManager;
+import base.driverManager.PlatformsType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DriverManagerFactory extends Base {
-
+    /**
+     * This class init the driver instance by is type chrome/fire/driver etc...
+     * Its hold the driver manager instance and will return the driver
+     * chrome - firefox - android driver
+     * each class here is an class the extend the abstract class driver manager
+     * and create the object from each case
+     * than once the object is created the driverManager will return the placement driver instance
+     */
     public static DriverManager getManager(String type) {
         DriverManager driverManager;
         switch (type) {
-            case BrowserType.CHROME:
+            case PlatformsType.CHROME:
                 driverManager = new ChromeDriverManager();
                 break;
-            case BrowserType.FIREFOX:
+            case PlatformsType.FIREFOX:
                 driverManager = new FirefoxDriverManager();
                 break;
-            case BrowserType.ANDROID:
+            case PlatformsType.ANDROID:
                 driverManager = new AndroidDriverManager();
                 break;
-            case BrowserType.REMOTE:
+            case PlatformsType.REMOTE:
                 driverManager = new RemoteDriverManager();
                 break;
             default:

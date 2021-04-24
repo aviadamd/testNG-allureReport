@@ -1,6 +1,6 @@
 package base.driverManager;
 
-public interface BrowserType {
+public interface PlatformsType {
     String CHROME = "chrome";
     String FIREFOX = "firefox";
     String ANDROID = "android";

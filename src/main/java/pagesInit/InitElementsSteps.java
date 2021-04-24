@@ -2,8 +2,8 @@ package pagesInit;
 
 import org.openqa.selenium.WebDriver;
 
-public interface InitElements {
-    void initElements(WebDriver driver);
+public interface InitElementsSteps {
+    void initElements(WebDriver driver, String description);
     boolean isAndroidDriver(WebDriver driver);
     boolean isWebDriver(WebDriver driver);
 }

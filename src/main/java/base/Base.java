@@ -7,13 +7,7 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import utilities.UiUtilitiesObjects;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -26,8 +20,6 @@ public class Base {
     public static PropertyConfig getProperty;
     public static UiUtilitiesObjects utilities;
     public static Screenshot imageScreenShot;
-    public static ImageDiff imageDiff;
-    public ImageDiffer imageDiffer = new ImageDiffer();
 
     @BeforeClass
     public void initClass() {

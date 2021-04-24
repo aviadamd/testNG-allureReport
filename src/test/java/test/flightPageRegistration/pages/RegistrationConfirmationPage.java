@@ -3,10 +3,10 @@ package test.flightPageRegistration.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pagesInit.InitPages;
+import pagesInit.InitsPagesManager;
 import pagesInit.PageType;
 
-public class RegistrationConfirmationPage extends InitPages {
+public class RegistrationConfirmationPage extends InitsPagesManager {
 
     public RegistrationConfirmationPage(WebDriver driver) {
         super(PageType.WEB, driver);

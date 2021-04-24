@@ -1,12 +1,11 @@
 package base.driverManager.InitDrivers;
 
-import base.driverManager.DriverManager;
+import base.driverManager.factory.DriverManager;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.URL;
 
 public class RemoteDriverManager extends DriverManager {

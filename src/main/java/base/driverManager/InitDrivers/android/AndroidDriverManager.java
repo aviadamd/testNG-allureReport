@@ -1,7 +1,6 @@
 package base.driverManager.InitDrivers.android;
 
-import base.Base;
-import base.driverManager.DriverManager;
+import base.driverManager.factory.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -11,11 +10,14 @@ import io.appium.mitmproxy.InterceptedMessage;
 import io.appium.mitmproxy.MitmproxyJava;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 @Slf4j
+/**
+ * implement the factory pattern
+ * this class extend the driver manager to implements
+ * createDriver() method and init android driver
+ * stopDriver() stop chrome driver
+ */
 @Description("use as a class that extends DriverManager abstract class template")
 public class AndroidDriverManager extends DriverManager {
 
@@ -59,7 +67,11 @@ public class AndroidDriverManager extends DriverManager {
                 .withCapabilities(capabilities)
                 .withStartUpTimeOut(20, TimeUnit.SECONDS));
         server.start();
-        return new AndroidDriver<>(server.getUrl(), capabilities);
+        return androidDriver(server.getUrl(), capabilities);
+    }
+
+    private static AndroidDriver<WebElement> androidDriver(URL url, Capabilities caps) {
+        return new AndroidDriver<>(url,caps);
     }
 
     private static DesiredCapabilities initCapabilities() {

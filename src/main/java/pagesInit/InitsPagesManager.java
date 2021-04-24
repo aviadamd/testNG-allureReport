@@ -4,8 +4,9 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class InitPages {
-    public InitPages(PageType type, WebDriver driver) {
+public abstract class InitsPagesManager {
+
+    public InitsPagesManager(PageType type, WebDriver driver) {
         switch (type) {
             case WEB:
                 PageFactory.initElements(driver,this);

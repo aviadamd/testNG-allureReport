@@ -13,6 +13,10 @@ import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * an web shared class to give helper methods that web clients have in common
+ * the chrome driver and firefox driver use...
+ */
 @Slf4j
 public class SharedWebManager extends Base {
 

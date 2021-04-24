@@ -5,44 +5,42 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pagesInit.InitElements;
+import pagesInit.InitElementsSteps;
 import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
 
+/**
+ * Implement the init elements interface for
+ * @override initElements()
+ * @override isAndroidDriver()
+ * @override isWebDriver()
+ */
 @Slf4j
-public class InitElementsManager extends FactoryBaseTest implements InitElements {
+public class InitElementsManager extends FactoryBaseTest implements InitElementsSteps {
 
     @Override
-    public void initElements(WebDriver driver) {
+    public void initElements(WebDriver driver, String desc) {
         try {
             if (isAndroidDriver(driver)) {
                 aManUi = new AccountManagementUi(driver);
-                log.info("init " + aManUi.getClass().getName());
+                log.info("init " + aManUi.getClass().getName() + " on " + desc);
             } else if (isWebDriver(driver)) {
                 flightUi = new FlightUi(driver);
-                log.info("init " + flightUi.getClass().getName());
+                log.info("init " + flightUi.getClass().getName() + " on " + desc);
             }
         } catch (Exception e) {
-            throw new RuntimeException("init pages error : " + e.getMessage());
+            throw new RuntimeException(desc + " init page general error : " + e.getMessage());
         }
     }
 
     @Override
     public boolean isAndroidDriver(WebDriver driver) {
-        if (driver instanceof AndroidDriver<?>) {
-            log.info("init " + driver.getClass().getName());
-            return true;
-        }
-        return false;
+        return driver instanceof AndroidDriver<?>;
     }
 
     @Override
     public boolean isWebDriver(WebDriver driver) {
-        if (driver instanceof ChromeDriver || driver instanceof FirefoxDriver) {
-            log.info("init " + driver.getClass().getName());
-            return true;
-        }
-        return false;
+        return driver instanceof ChromeDriver || driver instanceof FirefoxDriver;
     }
 
 }

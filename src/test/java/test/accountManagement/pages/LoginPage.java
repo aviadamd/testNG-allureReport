@@ -3,14 +3,12 @@ package test.accountManagement.pages;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pagesInit.InitPages;
+import pagesInit.InitsPagesManager;
 import pagesInit.PageType;
 
-public class LoginPage extends InitPages {
+public class LoginPage extends InitsPagesManager {
 
-    public LoginPage(WebDriver driver) {
-        super(PageType.MOBILE, driver);
-    }
+    public LoginPage(WebDriver driver) { super(PageType.MOBILE, driver); }
 
     private final String appId = "com.ideomobile.hapoalim:id/";
 
@@ -25,4 +23,5 @@ public class LoginPage extends InitPages {
 
     @AndroidFindBy(id = appId + "login_password_view_automation")
     public WebElement userPasswordEditText;
+
 }
