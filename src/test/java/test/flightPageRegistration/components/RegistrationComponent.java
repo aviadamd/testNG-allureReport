@@ -11,7 +11,7 @@ public class RegistrationComponent extends FactoryBaseTest implements WebConditi
     @Override
     @Step("navigate to {0} base url")
     public void goTo(String baseUrl) {
-        navigateToUrl(baseUrl);
+        goToUrl(baseUrl);
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
     }
 

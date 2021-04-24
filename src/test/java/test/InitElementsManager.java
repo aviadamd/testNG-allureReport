@@ -1,11 +1,11 @@
 package test;
 
+import base.Base;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pagesInit.InitElementsSteps;
 import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
 
@@ -16,9 +16,8 @@ import test.flightPageRegistration.FlightUi;
  * @override isWebDriver()
  */
 @Slf4j
-public class InitElementsManager extends FactoryBaseTest implements InitElementsSteps {
+public class InitElementsManager extends FactoryBaseTest {
 
-    @Override
     public void initElements(WebDriver driver, String desc) {
         try {
             if (isAndroidDriver(driver)) {
@@ -33,12 +32,10 @@ public class InitElementsManager extends FactoryBaseTest implements InitElements
         }
     }
 
-    @Override
     public boolean isAndroidDriver(WebDriver driver) {
         return driver instanceof AndroidDriver<?>;
     }
 
-    @Override
     public boolean isWebDriver(WebDriver driver) {
         return driver instanceof ChromeDriver || driver instanceof FirefoxDriver;
     }

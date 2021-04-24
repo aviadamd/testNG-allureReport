@@ -5,8 +5,6 @@ import base.anontations.Author;
 import base.driverManager.factory.DriverManager;
 import base.driverManager.factory.DriverManagerFactory;
 import io.qameta.allure.Description;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import test.accountManagement.AccountManagementUi;

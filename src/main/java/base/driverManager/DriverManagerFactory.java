@@ -1,11 +1,10 @@
-package base.driverManager.factory;
+package base.driverManager;
 
 import base.Base;
 import base.driverManager.InitDrivers.RemoteDriverManager;
 import base.driverManager.InitDrivers.android.AndroidDriverManager;
 import base.driverManager.InitDrivers.web.ChromeDriverManager;
 import base.driverManager.InitDrivers.web.FirefoxDriverManager;
-import base.driverManager.PlatformsType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

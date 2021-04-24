@@ -1,6 +1,6 @@
 package base.driverManager.InitDrivers.android;
 
-import base.driverManager.factory.DriverManager;
+import base.driverManager.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;

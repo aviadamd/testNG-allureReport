@@ -1,4 +1,4 @@
-package base.driverManager.factory;
+package base.driverManager;
 
 import base.Base;
 import base.driverManager.Manager;

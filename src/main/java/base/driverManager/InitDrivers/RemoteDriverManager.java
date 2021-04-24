@@ -1,6 +1,6 @@
 package base.driverManager.InitDrivers;
 
-import base.driverManager.factory.DriverManager;
+import base.driverManager.DriverManager;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;

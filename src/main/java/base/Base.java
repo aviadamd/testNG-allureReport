@@ -28,7 +28,7 @@ public class Base {
         utilities = new UiUtilitiesObjects();
     }
 
-    protected static void navigateToUrl(String url) {
+    protected static void goToUrl(String url) {
         driver.manage().window().maximize();
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

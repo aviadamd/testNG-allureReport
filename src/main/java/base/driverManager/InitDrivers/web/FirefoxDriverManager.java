@@ -1,6 +1,6 @@
 package base.driverManager.InitDrivers.web;
 
-import base.driverManager.factory.DriverManager;
+import base.driverManager.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
