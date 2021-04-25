@@ -4,6 +4,9 @@ import base.driverManager.InitDrivers.web.WebConditions;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import test.FactoryBaseTest;
+import test.flightPageRegistration.pages.RegistrationPage;
+import utilities.UiUtilitiesObjects;
+import java.util.function.BiConsumer;
 
 @Slf4j
 public class RegistrationComponent extends FactoryBaseTest implements WebConditions {
@@ -30,8 +33,18 @@ public class RegistrationComponent extends FactoryBaseTest implements WebConditi
 
     @Step("submit step")
     public void submit(){
-        utilities.uiActions()
-                .click(flightUi.registrationPage.submitBtn);
+        BiConsumer<UiUtilitiesObjects,RegistrationPage> chain = verifyRegistrationPage.andThen(submit);
+        chain.accept(new UiUtilitiesObjects(),new RegistrationPage(driver));
     }
 
+    public BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action,page) -> {
+        action.uiActions().elementPresented(page.usernameTxt,5);
+        action.uiActions().elementPresented(page.passwordTxt,5);
+        action.uiActions().elementPresented(page.confirmPasswordTxt,5);
+    };
+
+    public BiConsumer<UiUtilitiesObjects, RegistrationPage> submit = (action,page) -> {
+        action.verifications().load(page.submitBtn);
+        action.uiActions().click(page.submitBtn);
+    };
 }
