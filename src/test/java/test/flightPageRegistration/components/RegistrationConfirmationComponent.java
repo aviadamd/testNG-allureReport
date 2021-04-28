@@ -12,4 +12,5 @@ public class RegistrationConfirmationComponent extends FactoryBaseTest {
         utilities.uiActions().elementPresented(flightUi.registrationConfirmationPage.signinLink,5);
         utilities.uiActions().click(flightUi.registrationConfirmationPage.signinLink);
     }
+
 }

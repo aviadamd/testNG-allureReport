@@ -28,17 +28,6 @@ public class  BookFlightTest extends FactoryBaseTest {
         registrationComponent.submit();
     }
 
-//    @Test
-//    public void registration() {
-//        registrationComponent.registrations("create registration action", (a,b) -> {
-//            a.getLeft().goTo(getProperty.url);
-//            a.getRight().print("about to enter details");
-//            a.getLeft().enterUserDetails("selenium", "docker");
-//            a.getLeft().enterUserCredentials("selenium", "docker");
-//            a.getLeft().submit();
-//        });
-//    }
-
     @Test(priority = 2, dependsOnMethods = "registrationPage")
     public void registrationConfirmationPage() {
         registrationConfirmationPage.goToFlightDetailsSignLink();

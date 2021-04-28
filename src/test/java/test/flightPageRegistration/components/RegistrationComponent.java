@@ -5,12 +5,9 @@ import base.Steps;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import test.FactoryBaseTest;
-import test.flightPageRegistration.FlightUi;
 import test.flightPageRegistration.pages.RegistrationPage;
 import utilities.UiUtilitiesObjects;
-
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -47,32 +44,17 @@ public class RegistrationComponent extends FactoryBaseTest implements Steps {
     @Step("submit step")
     public void submit(){
         BiConsumer<UiUtilitiesObjects,RegistrationPage> chain = verifyRegistrationPage.andThen(submit);
-        chain.accept(new UiUtilitiesObjects(),new RegistrationPage(driver));
+        chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
     }
 
-    public RegistrationComponent registration(String print, Consumer<Triple<RegistrationComponent
-            , UiUtilitiesObjects, FlightUi>> testAction) {
-        log.info(print);
-        testAction.accept(Triple.of(new RegistrationComponent(), new UiUtilitiesObjects(), new FlightUi(driver)));
-        return this;
-    }
-
-    public RegistrationComponent registrations(String name, BiConsumer<Pair<RegistrationComponent, Action>,
-            Pair<UiUtilitiesObjects, FlightUi>> testAction) {
-        log.info(name);
-        testAction.accept(Pair.of(new RegistrationComponent(), new Action()), Pair.of(new UiUtilitiesObjects(), new FlightUi(driver)));
-        return this;
-    }
-
-    public BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action,page) -> {
+    private final BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action, page) -> {
         action.uiActions().elementPresented(page.usernameTxt,5);
         action.uiActions().elementPresented(page.passwordTxt,5);
         action.uiActions().elementPresented(page.confirmPasswordTxt,5);
     };
 
-    public BiConsumer<UiUtilitiesObjects, RegistrationPage> submit = (action,page) -> {
+    private final BiConsumer<UiUtilitiesObjects, RegistrationPage> submit = (action,page) -> {
         action.verifications().load(page.submitBtn);
         action.uiActions().click(page.submitBtn);
     };
-
 }
