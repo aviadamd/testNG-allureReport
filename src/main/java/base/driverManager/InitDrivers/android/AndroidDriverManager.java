@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
 
@@ -93,6 +95,11 @@ public class AndroidDriverManager extends DriverManager {
                     return proxy;
                 }, 8081, null));
                 proxy.get().start();
+            } else {
+                List<LogEntry> getHttp = driver.manage().logs().get("logcat").getAll();
+                for (LogEntry logEntry : getHttp) {
+                    System.out.println(logEntry);
+                }
             }
         } catch (TimeoutException | IOException e) {
            log.error(e.getMessage());

@@ -5,31 +5,32 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
-import test.flightPageRegistration.components.RegistrationComponent;
-import test.flightPageRegistration.components.RegistrationConfirmationComponent;
+import test.flightPageRegistration.components.ShareComponents;
 
 @Listeners(AllureListener.class)
 public class  BookFlightTest extends FactoryBaseTest {
 
-    private RegistrationComponent registrationComponent;
-    private RegistrationConfirmationComponent registrationConfirmationPage;
+    private ShareComponents shareComponents;
 
     @BeforeClass
     public void init() {
-        this.registrationComponent = new RegistrationComponent();
-        this.registrationConfirmationPage = new RegistrationConfirmationComponent();
+        this.shareComponents = new ShareComponents();
     }
 
     @Test(priority = 1)
     public void registrationPage() {
-        registrationComponent.goTo(getProperty.url);
-        registrationComponent.enterUserDetails("selenium", "docker");
-        registrationComponent.enterUserCredentials("selenium", "docker");
-        registrationComponent.submit();
+        shareComponents.shareComponents("registration step 1", (action1, action2) -> {
+            action2.getLeft().goTo(getProperty.url);
+            action2.getLeft().enterUserDetails("selenium", "docker");
+            action2.getLeft().enterUserCredentials("selenium", "docker");
+            action2.getLeft().submit();
+        });
     }
 
     @Test(priority = 2, dependsOnMethods = "registrationPage")
     public void registrationConfirmationPage() {
-        registrationConfirmationPage.goToFlightDetailsSignLink();
+        shareComponents.shareComponents("registration step 2", (action1, action2) -> {
+            action2.getRight().goToFlightDetailsSignLink();
+        });
     }
 }
