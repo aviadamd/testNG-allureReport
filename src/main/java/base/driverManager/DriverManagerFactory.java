@@ -5,6 +5,7 @@ import base.driverManager.InitDrivers.RemoteDriverManager;
 import base.driverManager.InitDrivers.android.AndroidDriverManager;
 import base.driverManager.InitDrivers.web.ChromeDriverManager;
 import base.driverManager.InitDrivers.web.FirefoxDriverManager;
+import com.fasterxml.jackson.databind.deser.DataFormatReaders;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
