@@ -5,16 +5,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
-import test.flightPageRegistration.components.ShareComponents;
+import test.flightPageRegistration.ShareComponents;
+import utilities.Utilities;
 
 @Listeners(AllureListener.class)
-public class  BookFlightTest extends FactoryBaseTest {
+public class BookFlightTest extends FactoryBaseTest {
 
     private ShareComponents shareComponents;
+    private Utilities utilities;
 
     @BeforeClass
     public void init() {
         this.shareComponents = new ShareComponents();
+        this.utilities = new Utilities();
     }
 
     @Test(priority = 1)

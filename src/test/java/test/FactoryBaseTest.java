@@ -5,6 +5,7 @@ import base.anontations.Author;
 import base.driverManager.DriverManager;
 import base.driverManager.DriverManagerFactory;
 import io.qameta.allure.Description;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import test.accountManagement.AccountManagementUi;
@@ -15,12 +16,13 @@ import test.flightPageRegistration.FlightUi;
  * beforeClass() int the driver from the DriverManagerFactory
  * afterClass() close driver session
  */
-@Author(desc = "aviad")
+@Author(desc = "")
 public class FactoryBaseTest extends Base {
 
     private DriverManager driverManager;
     public static FlightUi flightUi;
     public static AccountManagementUi aManUi;
+    private final ThreadLocal<WebDriver> getDriver = new ThreadLocal<>();
 
     /**
      * Init the driver manager object to the getManager method from DriverManger instance
@@ -29,10 +31,10 @@ public class FactoryBaseTest extends Base {
     @BeforeClass(description = "start sessions")
     @Description(value = "start session before test")
     public void beforeClass() {
-        String platform = getProperty.platformType;
-        driverManager = DriverManagerFactory.getManager(platform);
-        driver = driverManager.getDriver();
-        new InitElementsManager().initElements(driver, platform);
+        driverManager = DriverManagerFactory.getManager(getProperty.platformType);
+        getDriver.set(driverManager.getDriver());
+        driver = getDriver.get();
+        new InitElementsManager().initElements(driver, getProperty.platformType);
     }
 
     @AfterClass(description = "quit sessions")

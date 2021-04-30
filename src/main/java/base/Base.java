@@ -13,8 +13,6 @@ import ru.yandex.qatools.ashot.Screenshot;
 import utilities.UiUtilitiesObjects;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-
 import static org.openqa.selenium.OutputType.BYTES;
 
 @Slf4j
@@ -33,12 +31,6 @@ public class Base {
         String path = "/src/main/resources/config.properties";
         getProperty = new PropertyConfig(path);
         utilities = new UiUtilitiesObjects();
-    }
-
-    protected static void goToUrl(String url) {
-        driver.manage().window().maximize();
-        driver.get(url);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     /**

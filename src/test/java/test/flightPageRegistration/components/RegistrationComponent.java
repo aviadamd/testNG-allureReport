@@ -1,31 +1,22 @@
 package test.flightPageRegistration.components;
 
-import base.Action;
-import base.Steps;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import test.FactoryBaseTest;
+import test.flightPageRegistration.FlightUi;
 import test.flightPageRegistration.pages.RegistrationPage;
 import utilities.UiUtilitiesObjects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @Slf4j
-public class RegistrationComponent extends FactoryBaseTest implements Steps {
+public class RegistrationComponent extends FactoryBaseTest {
 
-    @Override
     @Step("navigate to {0} base url")
     public void goTo(String baseUrl) {
-        goToUrl(baseUrl);
+        utilities.uiActions().goToUrl(baseUrl);
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
-    }
-
-    @Override
-    @Step("step {0} , action {1}")
-    public void step(String name, Consumer<Pair<Action, UiUtilitiesObjects>> action) {
-        log.info(name);
-        action.accept(Pair.of(new Action(),new UiUtilitiesObjects()));
     }
 
     @Step("enter user details , first name {0}  last name {1}")
@@ -47,7 +38,13 @@ public class RegistrationComponent extends FactoryBaseTest implements Steps {
         chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
     }
 
-    private final BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action, page) -> {
+    public RegistrationComponent registrations(String name, Consumer<Triple<RegistrationComponent,UiUtilitiesObjects, FlightUi>> testAction) {
+        log.info(name);
+        testAction.accept(Triple.of(new RegistrationComponent(),new UiUtilitiesObjects(), new FlightUi(driver)));
+        return new RegistrationComponent();
+    }
+
+    public BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action,page) -> {
         action.uiActions().elementPresented(page.usernameTxt,5);
         action.uiActions().elementPresented(page.passwordTxt,5);
         action.uiActions().elementPresented(page.confirmPasswordTxt,5);

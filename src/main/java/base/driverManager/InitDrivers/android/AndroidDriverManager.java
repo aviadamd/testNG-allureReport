@@ -1,6 +1,7 @@
 package base.driverManager.InitDrivers.android;
 
 import base.driverManager.DriverManager;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -12,12 +13,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
-
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -72,7 +70,7 @@ public class AndroidDriverManager extends DriverManager {
         return androidDriver(server.getUrl(), capabilities);
     }
 
-    private static AndroidDriver<WebElement> androidDriver(URL url, Capabilities caps) {
+    private static AndroidDriver<MobileElement> androidDriver(URL url, Capabilities caps) {
         return new AndroidDriver<>(url,caps);
     }
 

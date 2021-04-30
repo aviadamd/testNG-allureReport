@@ -1,6 +1,5 @@
 package test;
 
-import base.Base;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +21,8 @@ public class InitElementsManager extends FactoryBaseTest {
         try {
             if (isAndroidDriver(driver)) {
                 aManUi = new AccountManagementUi(driver);
-                log.info("init " + aManUi.getClass().getName() + " on " + desc);
             } else if (isWebDriver(driver)) {
                 flightUi = new FlightUi(driver);
-                log.info("init " + flightUi.getClass().getName() + " on " + desc);
             }
         } catch (Exception e) {
             throw new RuntimeException(desc + " init page general error : " + e.getMessage());
@@ -37,7 +34,8 @@ public class InitElementsManager extends FactoryBaseTest {
     }
 
     public boolean isWebDriver(WebDriver driver) {
-        return driver instanceof ChromeDriver || driver instanceof FirefoxDriver;
+        return driver instanceof ChromeDriver
+                ||  driver instanceof FirefoxDriver;
     }
 
 }

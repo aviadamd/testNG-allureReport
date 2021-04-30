@@ -14,8 +14,7 @@ public abstract class InitsPagesManager {
             case MOBILE:
                 PageFactory.initElements(new AppiumFieldDecorator(driver),this);
                 break;
-            default:
-                throw new IllegalArgumentException(type + " is not valid arg");
+            default: throw new IllegalArgumentException(type + " is not valid arg");
         }
     }
 }
