@@ -32,8 +32,7 @@ public class DriverManagerFactory extends Base {
             case PlatformsType.REMOTE:
                 driverManager = new RemoteDriverManager();
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + type);
+            default: throw new IllegalStateException("Unexpected value: " + type);
         }
         log.debug("init " + type + " before test");
         return driverManager;

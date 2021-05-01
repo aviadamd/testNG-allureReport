@@ -3,6 +3,7 @@ package utilities.verfications;
 import base.Base;
 import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import static utilities.uiActions.UiActions.getString;
 
 @Slf4j
@@ -17,18 +20,25 @@ public class Verifications extends Base {
 
     @Description("load")
     public void load(WebElement element) {
+
         load(new ArrayList<>(Collections.singleton(element)));
     }
 
     @Description("load")
-    public void load(ArrayList<WebElement> elements) {
-        for (WebElement pageEle : elements) {
+    public void load(List<WebElement> elements) {
+        for (WebElement pageEle : getAll(elements)) {
             if (utilities.uiActions().elementPresented(pageEle, 5)) {
                 log.info("load " + pageEle.toString());
             } else {
                 log.info("fail load " + pageEle.toString());
             }
         }
+    }
+
+    @Description("get all elements")
+    public List<WebElement> getAll(List<WebElement> locator) {
+        WebDriverWait wait = new WebDriverWait(driver,2);
+        return wait.until(ExpectedConditions.visibilityOfAllElements(locator));
     }
 
     @Description("verify number of elements")

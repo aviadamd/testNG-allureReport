@@ -14,11 +14,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
-import utilities.UiUtilitiesObjects;
 import utilities.WaitCondition;
+import utilities.errors.ProjectsErrors;
+import utilities.errors.Reasons;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +27,6 @@ import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import static utilities.WaitCondition.enabled;
 import static utilities.WaitCondition.visible;
 
