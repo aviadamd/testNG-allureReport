@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import pagesInit.InitElementsSteps;
 import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
 
@@ -15,8 +16,9 @@ import test.flightPageRegistration.FlightUi;
  * @override isWebDriver()
  */
 @Slf4j
-public class InitElementsManager extends FactoryBaseTest {
+public class InitElementsManager extends FactoryBaseTest implements InitElementsSteps {
 
+    @Override
     public void initElements(WebDriver driver, String desc) {
         try {
             if (isAndroidDriver(driver)) {
@@ -29,10 +31,12 @@ public class InitElementsManager extends FactoryBaseTest {
         }
     }
 
+    @Override
     public boolean isAndroidDriver(WebDriver driver) {
         return driver instanceof AndroidDriver<?>;
     }
 
+    @Override
     public boolean isWebDriver(WebDriver driver) {
         return driver instanceof ChromeDriver
                 ||  driver instanceof FirefoxDriver;
