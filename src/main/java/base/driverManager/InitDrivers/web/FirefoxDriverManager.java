@@ -9,9 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
-
 import java.util.function.Supplier;
-
 import static base.driverManager.InitDrivers.web.SharedWebManager.seleniumProxy;
 
 /**
@@ -26,13 +24,12 @@ public class FirefoxDriverManager extends DriverManager {
     @Override
     protected void createDriver() {
         firefoxDriverSupplier.get();
-        new SharedWebManager().clearCache();
+        SharedWebManager.clearCache(driver);
     }
 
     @Override
     protected void stopDriver() {
-        SharedWebManager.stopProxy();
-        driver.quit();
+        SharedWebManager.stopDriver(driver);
     }
 
     private final Supplier<WebDriver> firefoxDriverSupplier = () -> {

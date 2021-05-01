@@ -6,15 +6,13 @@ import test.FactoryBaseTest;
 import test.flightPageRegistration.components.RegistrationComponent;
 import test.flightPageRegistration.components.RegistrationConfirmationComponent;
 import utilities.UiUtilitiesObjects;
-
 import java.util.function.BiConsumer;
 
 @Slf4j
 public class ShareComponents extends FactoryBaseTest {
 
-    public ShareComponents shareComponents(String print, BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
+    public ShareComponents shareComponents(BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
                 Pair<RegistrationComponent,RegistrationConfirmationComponent>> testAction) {
-        log.info(print);
         testAction.accept(
                 Pair.of(new UiUtilitiesObjects(), new FlightUi(driver)),
                 Pair.of(new RegistrationComponent(), new RegistrationConfirmationComponent()));

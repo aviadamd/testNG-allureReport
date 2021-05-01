@@ -25,13 +25,12 @@ public class ChromeDriverManager extends DriverManager {
     @Override
     protected void createDriver() {
         chromeDriverSupplier.get();
-        new SharedWebManager().clearCache();
+        SharedWebManager.clearCache(driver);
     }
 
     @Override
     protected void stopDriver() {
-        SharedWebManager.stopProxy();
-        driver.quit();
+        SharedWebManager.stopDriver(driver);
     }
 
     private final Supplier<WebDriver> chromeDriverSupplier = () -> {

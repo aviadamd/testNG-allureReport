@@ -9,9 +9,13 @@ import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.proxy.CaptureType;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriver;
+
 import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.Set;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * an web shared class to give helper methods that web clients have in common
@@ -70,7 +74,7 @@ public class SharedWebManager extends Base {
         }
     }
 
-    public void clearCache() {
+    public static void clearCache(WebDriver driver) {
         Set<Cookie> cookies = driver.manage().getCookies();
         for (Cookie cookie : cookies) {
             driver.manage().deleteCookieNamed(cookie.getName());
@@ -79,5 +83,10 @@ public class SharedWebManager extends Base {
         if (cookies.size() == 0) {
             log.info("clear browser cache");
         }
+    }
+
+    public static void stopDriver(WebDriver driver) {
+        SharedWebManager.stopProxy();
+        ofNullable(driver).ifPresent(WebDriver::quit);
     }
 }

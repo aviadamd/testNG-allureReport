@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static java.util.Optional.ofNullable;
+
 @Slf4j
 /**
  * implement the factory pattern
@@ -47,7 +49,7 @@ public class AndroidDriverManager extends DriverManager {
     @Override
     @SneakyThrows
     protected void stopDriver() {
-        driver.quit();
+        ofNullable(driver).ifPresent(WebDriver::quit);
         server.stop();
         stopProxy();
     }

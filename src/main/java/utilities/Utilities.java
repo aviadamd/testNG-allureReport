@@ -6,25 +6,44 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import utilities.javaScriptUtils.JavaScriptUtil;
-import utilities.uiActions.UiActions;
-import utilities.verfications.Verifications;
-
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @Slf4j
 public class Utilities extends Base {
 
-    @Description("ui actions wrapper")
-    public Consumer<Triple<UiActions,Verifications,JavaScriptUtil>>
-    uiActionsWrapper(Consumer<Triple<UiActions,Verifications,JavaScriptUtil>> uiActionsConsumer, boolean fail) {
+    @Description("wrapper")
+    public <A,B extends Exception> Consumer<A> wrapper(Consumer<A> consumer, Class <B> clazz, boolean fail) {
         return action -> {
+          try {
+              consumer.accept(action);
+          } catch (Exception exception) {
+              String error = "error from ui actions : ";
+              try {
+                  B cast = clazz.cast(exception);
+                  log.info(cast.getMessage() +  error);
+              } catch (Exception exception1) {
+                  log.info(exception1.getMessage());
+                  if (fail) Assert.fail(error + exception1.getMessage());
+              }
+          }
+        };
+    }
+
+    @Description("wrapper")
+    public <A,B,E extends Exception> BiConsumer<A,B> wrapper(BiConsumer<A,B> consumer, Class <E> clazz, boolean fail) {
+        return (action1, action2) -> {
             try {
-                uiActionsConsumer.accept(Triple.of(new UiActions(),new Verifications(),new JavaScriptUtil()));
-            } catch (WebDriverException e) {
+                consumer.accept(action1,action2);
+            } catch (Exception exception) {
                 String error = "error from ui actions : ";
-                log.info(error + e.getMessage());
-                if (fail) Assert.fail(error + e.getMessage());
+                try {
+                    E cast = clazz.cast(exception);
+                    log.info(cast.getMessage() +  error);
+                } catch (Exception exception1) {
+                    log.info(exception1.getMessage());
+                    if (fail) Assert.fail(error + exception1.getMessage());
+                }
             }
         };
     }
