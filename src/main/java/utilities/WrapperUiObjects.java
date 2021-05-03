@@ -5,10 +5,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public interface WrapperUiObjects {
-
-    @Description("wrapper")
-    void wrapper(Consumer<UiUtilitiesObjects> consumer, boolean fail);
-
     @Description("wrapper")
     <A,B extends Exception> Consumer<A> wrapper(Consumer<A> consumer, Class <B> clazz, boolean fail);
 

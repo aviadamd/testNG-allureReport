@@ -33,7 +33,6 @@ public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
         return new UiUtilitiesObjects();
     }
 
-    @Override
     @Description("wrapper")
     public void wrapper(Consumer<UiUtilitiesObjects> consumer, boolean fail) {
         wrapper(consumer, WebDriverException.class, fail);
