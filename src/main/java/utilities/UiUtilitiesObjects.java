@@ -3,6 +3,9 @@ package utilities;
 import base.Base;
 import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
 import utilities.errors.*;
 import utilities.javaScriptUtils.JavaScriptUtil;
@@ -15,25 +18,28 @@ import java.util.function.Consumer;
 import static utilities.errors.ErrorUtils.fail;
 
 @Slf4j
-public class UiUtilitiesObjects extends Base {
+public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
 
     public UiActions uiActions() {
         return new UiActions();
     }
-
     public Verifications verifications() {
         return new Verifications();
     }
-
     public JavaScriptUtil jsUtil() {
         return new JavaScriptUtil();
     }
-
     public UiUtilitiesObjects uiUtilitiesObjects() {
         return new UiUtilitiesObjects();
     }
 
-    private final String error = "error from ui actions : ";
+    @Override
+    @Description("wrapper")
+    public void wrapper(Consumer<UiUtilitiesObjects> consumer, boolean fail) {
+        wrapper(consumer, WebDriverException.class, fail);
+    }
+
+    @Override
     @Description("wrapper")
     public <A,B extends Exception> Consumer<A> wrapper(
             Consumer<A> consumer, Class <B> clazz, boolean fail) {
@@ -47,13 +53,15 @@ public class UiUtilitiesObjects extends Base {
                     log.info(cast.getMessage() +  error);
                 } catch (Exception exception1) {
                     if (fail) {
-                        Assert.fail(error + exception1.getMessage());
+                        fail(ProjectsErrors.class, error, exception1,
+                                Reasons.GENERAL, Category.INTERNAL, Severity.HIGH);
                     }
                 }
             }
         };
     }
 
+    @Override
     @Description("wrapper")
     public <A,B,E extends Exception> BiConsumer<A,B> wrapper(
             BiConsumer<A,B> consumer, Class <E> clazz, boolean fail) {
@@ -74,4 +82,6 @@ public class UiUtilitiesObjects extends Base {
             }
         };
     }
+
+    private final String error = "error from ui actions : ";
 }
