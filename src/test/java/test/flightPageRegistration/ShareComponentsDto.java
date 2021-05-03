@@ -8,5 +8,7 @@ import utilities.UiUtilitiesObjects;
 import java.util.function.BiConsumer;
 
 public interface ShareComponentsDto {
-    void shareComponents(BiConsumer<Pair<UiUtilitiesObjects, FlightUi>, Pair<RegistrationComponent, RegistrationConfirmationComponent>> testAction);
+    void shareComponents(
+            BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
+                       Pair<RegistrationComponent, RegistrationConfirmationComponent>> testAction);
 }

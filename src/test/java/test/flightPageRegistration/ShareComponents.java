@@ -12,8 +12,9 @@ import java.util.function.BiConsumer;
 public class ShareComponents extends FactoryBaseTest implements ShareComponentsDto {
 
     @Override
-    public void shareComponents(BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
-                Pair<RegistrationComponent,RegistrationConfirmationComponent>> testAction) {
+    public void shareComponents(
+            BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
+                       Pair<RegistrationComponent,RegistrationConfirmationComponent>> testAction) {
         testAction.accept(Pair.of(new UiUtilitiesObjects(), new FlightUi(driver)),
                 Pair.of(new RegistrationComponent(), new RegistrationConfirmationComponent()));
     }
