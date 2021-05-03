@@ -3,10 +3,10 @@ package test.accountManagement.pages;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebDriver;
-import pagesInit.InitsPagesManager;
 import pagesInit.PageType;
+import pagesInit.PagesManager;
 
-public class LoginPage extends InitsPagesManager {
+public class LoginPage extends PagesManager {
 
     public LoginPage(WebDriver driver) { super(PageType.MOBILE, driver); }
 
