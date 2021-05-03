@@ -95,15 +95,29 @@ public class AndroidDriverManager extends DriverManager {
                     return proxy;
                 }, 8081, null));
                 proxy.get().start();
-            } else {
-                List<LogEntry> getHttp = driver.manage().logs().get("logcat").getAll();
-                for (LogEntry logEntry : getHttp) {
-                    System.out.println(logEntry);
-                }
             }
         } catch (TimeoutException | IOException e) {
            log.error(e.getMessage());
         }
+    }
+
+    private boolean isHttp(String input) {
+        return input.contains("OkHttp");
+    }
+
+    private boolean isOk(String input) {
+        return input.contains("200");
+    }
+
+    private List<String> httpMessages() {
+        List<String> logs = new ArrayList<>();
+        List<LogEntry> logEntries = driver.manage().logs().get("logcat").getAll();
+        for (LogEntry entry : logEntries) {
+            if (isHttp(entry.getMessage())) {
+                logs.add(entry.getMessage());
+            }
+        }
+        return logs;
     }
 
     private void stopProxy() {

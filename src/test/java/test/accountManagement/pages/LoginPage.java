@@ -24,4 +24,6 @@ public class LoginPage extends InitsPagesManager {
     @AndroidFindBy(id = appId + "login_password_view_automation")
     public MobileElement userPasswordEditText;
 
+    @AndroidFindBy(id = appId + "proceedBtn")
+    public MobileElement enter;
 }

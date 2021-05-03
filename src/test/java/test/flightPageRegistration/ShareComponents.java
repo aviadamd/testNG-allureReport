@@ -9,13 +9,12 @@ import utilities.UiUtilitiesObjects;
 import java.util.function.BiConsumer;
 
 @Slf4j
-public class ShareComponents extends FactoryBaseTest {
+public class ShareComponents extends FactoryBaseTest implements ShareComponentsDto {
 
-    public ShareComponents shareComponents(BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
+    @Override
+    public void shareComponents(BiConsumer<Pair<UiUtilitiesObjects, FlightUi>,
                 Pair<RegistrationComponent,RegistrationConfirmationComponent>> testAction) {
-        testAction.accept(
-                Pair.of(new UiUtilitiesObjects(), new FlightUi(driver)),
+        testAction.accept(Pair.of(new UiUtilitiesObjects(), new FlightUi(driver)),
                 Pair.of(new RegistrationComponent(), new RegistrationConfirmationComponent()));
-        return new ShareComponents();
     }
 }
