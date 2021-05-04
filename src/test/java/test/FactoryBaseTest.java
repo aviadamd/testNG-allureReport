@@ -10,6 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import test.accountManagement.AccountManagementUi;
 import test.flightPageRegistration.FlightUi;
+import utilities.actions.ActionsManager;
+import utilities.actions.ActionsManagerFactory;
 
 /**
  * this class init the driver factory pattern
@@ -23,6 +25,7 @@ public class FactoryBaseTest extends Base {
     public static FlightUi flightUi;
     public static AccountManagementUi aManUi;
     private final ThreadLocal<WebDriver> getDriver = new ThreadLocal<>();
+    public static ActionsManager actions;
 
     /**
      * Init the driver manager object to the getManager method from DriverManger instance
@@ -35,6 +38,7 @@ public class FactoryBaseTest extends Base {
         getDriver.set(driverManager.getDriver());
         driver = getDriver.get();
         new InitElementsManager().initElements(driver, getProperty.platformType);
+        actions = ActionsManagerFactory.getActionsManager(getProperty.platform);
     }
 
     @AfterClass(description = "quit sessions")

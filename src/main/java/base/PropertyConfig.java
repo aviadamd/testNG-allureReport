@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class PropertyConfig {
 
+    public String platform;
     public String platformType;
     public String remotePlatformType;
     public String url;
@@ -25,6 +26,7 @@ public class PropertyConfig {
                 new FileInputStream(System.getProperty("user.dir") + path);
         properties.load(fileInputStream);
 
+        platform = setProperties("platform");
         platformType = setProperties("platformType");
         remotePlatformType = setProperties("remotePlatformType");
         url = setProperties("url");

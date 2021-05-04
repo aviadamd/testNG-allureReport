@@ -36,6 +36,7 @@ public class RegistrationComponent extends FactoryBaseTest {
     public void submit(){
         BiConsumer<UiUtilitiesObjects,RegistrationPage> chain = verifyRegistrationPage.andThen(submit);
         chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
+        //actions.click(flightUi.registrationPage.submitBtn);
     }
 
     public RegistrationComponent registrations(String name, Consumer<Triple<RegistrationComponent,UiUtilitiesObjects, FlightUi>> testAction) {
