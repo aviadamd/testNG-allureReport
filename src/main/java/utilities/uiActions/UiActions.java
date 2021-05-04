@@ -17,9 +17,6 @@ import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import utilities.WaitCondition;
-import utilities.errors.ProjectsErrors;
-import utilities.errors.Reasons;
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -46,14 +43,18 @@ public class UiActions extends Base {
 
     @Description("click")
     public void click(WebElement element) {
-        if (elementToBeClickable(element)) {
-            element.click();
-        } else Assert.fail("fail click on " + element.toString());
+        elementToBeClickable(element).ifPresent(e -> {
+            if (!(element.getText().isEmpty() || element.getText().isBlank())) {
+                log.info("about to click on : " + element.getText());
+            }
+            log.info("about to click on : " + element);
+            Optional.of(element).ifPresentOrElse(WebElement::click, Assert::fail);
+        });
     }
 
     @Description("click optional")
     public void clickOptional(WebElement element) {
-        if (elementToBeClickable(element) || elementPresented(element,1)) {
+        if (elementToBeClickable(element).isPresent() || elementPresented(element,1)) {
             click(element);
         }
     }
@@ -64,13 +65,14 @@ public class UiActions extends Base {
     }
 
     @Description("element to be clickable")
-    public boolean elementToBeClickable(WebElement element) {
-       return webDriverWait(10, ExpectedConditions.elementToBeClickable(element), element);
+    public Optional<Boolean> elementToBeClickable(WebElement element) {
+       return Optional.of(webDriverWait(
+               10, ExpectedConditions.elementToBeClickable(element), element));
     }
 
     @Description("send keys")
     public void sendKeys(WebElement element, String text) {
-        if (elementToBeClickable(element)) {
+        if (elementToBeClickable(element).isPresent()) {
             element.sendKeys(text);
         } else Assert.fail("fail send keys to " + element.toString());
     }
@@ -118,7 +120,7 @@ public class UiActions extends Base {
     public <T> boolean webDriverWait(int timeOut, ExpectedCondition<T> conditions, WebElement element) {
         try {
             new WebDriverWait(driver, timeOut).until(conditions.compose(driver -> {
-                log.info("condition :" + element.getText() + conditions.toString());
+                log.info("condition :" + element.getText() + conditions);
                 return null;
             }));
             return true;

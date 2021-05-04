@@ -20,9 +20,7 @@ import static utilities.errors.ErrorUtils.fail;
 @Slf4j
 public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
 
-    public UiActions uiActions() {
-        return new UiActions();
-    }
+    public UiActions uiActions() { return new UiActions(); }
     public Verifications verifications() {
         return new Verifications();
     }
