@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pagesInit.InitElementsSteps;
-import test.accountManagement.AccountManagementUi;
-import test.flightPageRegistration.FlightUi;
 import test.spotify.mobile.SpotifyMobileUi;
 import test.spotify.web.SpotifyWebUi;
 
