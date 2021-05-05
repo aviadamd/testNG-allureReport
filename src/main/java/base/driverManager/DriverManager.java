@@ -21,6 +21,7 @@ public abstract class DriverManager extends Base implements Manager {
      * stopDriver();
      */
     protected abstract void createDriver();
+    protected abstract boolean isServerRunning();
     protected abstract void stopDriver();
 
     @Override

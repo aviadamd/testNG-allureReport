@@ -29,6 +29,11 @@ public class ChromeDriverManager extends DriverManager {
     }
 
     @Override
+    protected boolean isServerRunning() {
+        return SharedWebManager.isDriverRunning();
+    }
+
+    @Override
     protected void stopDriver() {
         SharedWebManager.stopDriver(driver);
     }

@@ -89,4 +89,8 @@ public class SharedWebManager extends Base {
         SharedWebManager.stopProxy();
         ofNullable(driver).ifPresent(WebDriver::quit);
     }
+
+    public static boolean isDriverRunning() {
+        return driver != null;
+    }
 }

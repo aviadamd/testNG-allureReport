@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 import static utilities.errors.ErrorUtils.fail;
 
 @Slf4j
-public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
+public class UiUtilitiesObjects extends Base implements WrapperObjects {
 
     public SharedWebUtils sharedWebUtils() { return new SharedWebUtils(); }
     public SharedMobileUtils sharedMobileUtils() { return new SharedMobileUtils(); }

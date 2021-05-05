@@ -28,6 +28,11 @@ public class RemoteDriverManager extends DriverManager {
     }
 
     @Override
+    protected boolean isServerRunning() {
+        return driver != null;
+    }
+
+    @Override
     protected void stopDriver() {
         driver.quit();
     }

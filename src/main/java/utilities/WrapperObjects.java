@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public interface WrapperUiObjects {
+public interface WrapperObjects {
     @Description("wrapper")
     <A,B extends Exception> Consumer<A> wrapper(Consumer<A> consumer, Class <B> clazz, boolean fail);
 

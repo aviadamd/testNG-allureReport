@@ -54,6 +54,11 @@ public class AndroidDriverManager extends DriverManager {
         stopProxy();
     }
 
+    @Override
+    public boolean isServerRunning() {
+        return server.isRunning();
+    }
+
     private static WebDriver startAppiumServer() {
         HashMap<String, String> environment = new HashMap<>();
         environment.put("PATH", getProperty.localBin + System.getenv("PATH"));
