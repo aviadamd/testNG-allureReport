@@ -3,23 +3,24 @@ package utilities;
 import base.Base;
 import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import org.openqa.selenium.WebDriverException;
-import org.testng.Assert;
+import utilities.actionsManager.ActionsManager;
+import utilities.actionsManager.ActionsManagerFactory;
+import utilities.actionsManager.mobile.SharedMobileUtils;
+import utilities.actionsManager.web.SharedWebUtils;
 import utilities.errors.*;
 import utilities.javaScriptUtils.JavaScriptUtil;
 import utilities.uiActions.UiActions;
 import utilities.verfications.Verifications;
-
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
 import static utilities.errors.ErrorUtils.fail;
 
 @Slf4j
 public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
 
+    public SharedWebUtils sharedWebUtils() { return new SharedWebUtils(); }
+    public SharedMobileUtils sharedMobileUtils() { return new SharedMobileUtils(); }
     public UiActions uiActions() { return new UiActions(); }
     public Verifications verifications() {
         return new Verifications();
@@ -27,9 +28,7 @@ public class UiUtilitiesObjects extends Base implements WrapperUiObjects {
     public JavaScriptUtil jsUtil() {
         return new JavaScriptUtil();
     }
-    public UiUtilitiesObjects uiUtilitiesObjects() {
-        return new UiUtilitiesObjects();
-    }
+    public ActionsManager sharedActions() { return ActionsManagerFactory.getActionsManager(getProperty.platform); };
 
     @Description("wrapper")
     public void wrapper(Consumer<UiUtilitiesObjects> consumer, boolean fail) {

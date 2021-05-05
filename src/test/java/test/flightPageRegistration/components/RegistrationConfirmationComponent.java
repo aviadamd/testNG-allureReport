@@ -10,7 +10,7 @@ public class RegistrationConfirmationComponent extends FactoryBaseTest {
     @Step("go to flight details sign link")
     public void goToFlightDetailsSignLink() {
         utilities.uiActions().elementPresented(flightUi.registrationConfirmationPage.signinLink,5);
-        utilities.uiActions().click(flightUi.registrationConfirmationPage.signinLink);
+        utilities.sharedActions().click(flightUi.registrationConfirmationPage.signinLink);
     }
 
 }

@@ -3,7 +3,6 @@ package utilities.verfications;
 import base.Base;
 import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static utilities.uiActions.UiActions.getString;
+import static utilities.actionsManager.web.SharedWebUtils.getString;
 
 @Slf4j
 public class Verifications extends Base {
@@ -27,7 +26,7 @@ public class Verifications extends Base {
     @Description("load")
     public void load(List<WebElement> elements) {
         for (WebElement pageEle : getAll(elements)) {
-            if (utilities.uiActions().elementPresented(pageEle, 5)) {
+            if (utilities.uiActions().elementPresented(pageEle, 5).isPresent()) {
                 log.info("load " + pageEle.toString());
             } else {
                 log.info("fail load " + pageEle.toString());

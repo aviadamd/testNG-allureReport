@@ -15,28 +15,28 @@ public class RegistrationComponent extends FactoryBaseTest {
 
     @Step("navigate to {0} base url")
     public void goTo(String baseUrl) {
-        utilities.uiActions().goToUrl(baseUrl);
+        utilities.sharedWebUtils().goToUrl(baseUrl);
         utilities.uiActions().elementPresented(flightUi.registrationPage.firstNameTxt,5);
     }
 
     @Step("enter user details , first name {0}  last name {1}")
     public void enterUserDetails(String firstName, String lastName){
-        utilities.uiActions().sendKeys(flightUi.registrationPage.firstNameTxt, firstName);
-        utilities.uiActions().sendKeys(flightUi.registrationPage.lastNameTxt, lastName);
+        utilities.sharedActions().sendKeys(flightUi.registrationPage.firstNameTxt, firstName);
+        utilities.sharedActions().sendKeys(flightUi.registrationPage.lastNameTxt, lastName);
     }
 
     @Step("enter user credentials ,  user name {0}  password {1}")
     public void enterUserCredentials(String username, String password){
-        utilities.uiActions().sendKeys(flightUi.registrationPage.usernameTxt, username);
-        utilities.uiActions().sendKeys(flightUi.registrationPage.passwordTxt, password);
-        utilities.uiActions().sendKeys(flightUi.registrationPage.confirmPasswordTxt, password);
+        utilities.sharedActions().sendKeys(flightUi.registrationPage.usernameTxt, username);
+        utilities.sharedActions().sendKeys(flightUi.registrationPage.passwordTxt, password);
+        utilities.sharedActions().sendKeys(flightUi.registrationPage.confirmPasswordTxt, password);
     }
 
     @Step("submit step")
     public void submit(){
-        BiConsumer<UiUtilitiesObjects,RegistrationPage> chain = verifyRegistrationPage.andThen(submit);
-        chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
-        //actions.click(flightUi.registrationPage.submitBtn);
+       // BiConsumer<UiUtilitiesObjects,RegistrationPage> chain = verifyRegistrationPage.andThen(submit);
+       // chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
+        utilities.sharedActions().click(flightUi.registrationPage.submitBtn);
     }
 
     public RegistrationComponent registrations(String name, Consumer<Triple<RegistrationComponent,UiUtilitiesObjects, FlightUi>> testAction) {
@@ -53,6 +53,5 @@ public class RegistrationComponent extends FactoryBaseTest {
 
     private final BiConsumer<UiUtilitiesObjects, RegistrationPage> submit = (action,page) -> {
         action.verifications().load(page.submitBtn);
-        action.uiActions().click(page.submitBtn);
     };
 }
