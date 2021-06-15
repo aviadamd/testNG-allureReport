@@ -3,11 +3,8 @@ package utilities.actionsManager.mobile;
 import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.logging.LogEntry;
 import org.testng.Assert;
 import utilities.actionsManager.ActionsManager;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j

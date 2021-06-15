@@ -1,7 +1,6 @@
 package test;
 
 import base.Base;
-import base.anontations.Author;
 import base.driverManager.DriverManager;
 import base.driverManager.DriverManagerFactory;
 import io.qameta.allure.Description;
@@ -16,7 +15,6 @@ import test.flightPageRegistration.FlightUi;
  * beforeClass() int the driver from the DriverManagerFactory
  * afterClass() close driver session
  */
-@Author(desc = "")
 public class FactoryBaseTest extends Base {
 
     private DriverManager driverManager;

@@ -17,6 +17,7 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.context.annotation.Description;
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public class AndroidDriverManager extends DriverManager {
 
     @Override
     public boolean isServerRunning() {
-        return server.isRunning();
+        return server.isRunning() || server != null || checkIfServerIsRunning(4444);
     }
 
     private static WebDriver startAppiumServer() {
@@ -129,5 +130,18 @@ public class AndroidDriverManager extends DriverManager {
         if (getProperty.isRunProxy.equals("true")) {
             proxy.remove();
         }
+    }
+
+    public boolean checkIfServerIsRunning(int port) {
+        boolean isServerRunning = false;
+        ServerSocket serverSocket;
+        try {
+            serverSocket = new ServerSocket(port);
+            serverSocket.close();
+        } catch (IOException e) {
+            //If control comes here, then it means that the port is in use
+            isServerRunning = true;
+        }
+        return isServerRunning;
     }
 }

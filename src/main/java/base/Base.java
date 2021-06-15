@@ -43,4 +43,8 @@ public class Base {
         final List<ScreenshotConsumer> screenshotConsumers = new CopyOnWriteArrayList<>();
         StreamEx.of(screenshotConsumers).forEach(sc -> sc.handle(screenshot, testResult));
     }
+
+    private interface ScreenshotConsumer {
+        void handle(byte [] screenshot, ITestResult testResult);
+    }
 }
