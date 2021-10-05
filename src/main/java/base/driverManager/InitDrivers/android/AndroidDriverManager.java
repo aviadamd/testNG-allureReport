@@ -42,7 +42,7 @@ public class AndroidDriverManager extends DriverManager {
 
     @Override
     protected void createDriver() {
-        driver = startAppiumServer();
+        driver = initAppiumServerAndDriver();
         ((AndroidDriver<?>)driver).resetApp();
         startProxy();
     }
@@ -60,7 +60,7 @@ public class AndroidDriverManager extends DriverManager {
         return server.isRunning() || server != null || checkIfServerIsRunning(4444);
     }
 
-    private static WebDriver startAppiumServer() {
+    private static WebDriver initAppiumServerAndDriver() {
         HashMap<String, String> environment = new HashMap<>();
         environment.put("PATH", getProperty.localBin + System.getenv("PATH"));
         environment.put("ANDROID_HOME", getProperty.androidSdk);

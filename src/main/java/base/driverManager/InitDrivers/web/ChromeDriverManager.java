@@ -22,6 +22,13 @@ import static java.util.Collections.singletonList;
 @Description("use as a class that extends DriverManager abstract class template")
 public class ChromeDriverManager extends DriverManager {
 
+
+    private final Supplier<WebDriver> chromeDriverSupplier = () -> {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver(chromeOptions(seleniumProxy()));
+        return driver;
+    };
+
     @Override
     protected void createDriver() {
         chromeDriverSupplier.get();
@@ -38,12 +45,6 @@ public class ChromeDriverManager extends DriverManager {
         SharedWebManager.stopDriver(driver);
     }
 
-    private final Supplier<WebDriver> chromeDriverSupplier = () -> {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(chromeOptions(seleniumProxy()));
-        return driver;
-    };
-
     private ChromeOptions chromeOptions(Proxy seleniumProxy) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("test-type");
@@ -53,8 +54,9 @@ public class ChromeDriverManager extends DriverManager {
         options.setExperimentalOption("useAutomationExtension", false);
         options.setExperimentalOption("excludeSwitches", singletonList("enable-automation"));
         DesiredCapabilities seleniumCapabilities = new DesiredCapabilities();
-        if (getProperty.isRunProxy.equals("true"))
+        if (getProperty.isRunProxy.equals("true")) {
             seleniumCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        }
         seleniumCapabilities = DesiredCapabilities.chrome();
         seleniumCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         options.merge(seleniumCapabilities);

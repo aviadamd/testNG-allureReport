@@ -22,8 +22,7 @@ public class PropertyConfig {
     @SneakyThrows
     public PropertyConfig(String path) {
         properties = new Properties();
-        FileInputStream fileInputStream =
-                new FileInputStream(System.getProperty("user.dir") + path);
+        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + path);
         properties.load(fileInputStream);
 
         platform = setProperties("platform");

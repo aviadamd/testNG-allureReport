@@ -21,6 +21,12 @@ import static base.driverManager.InitDrivers.web.SharedWebManager.seleniumProxy;
 @Description("use as a class that extends DriverManager abstract class template")
 public class FirefoxDriverManager extends DriverManager {
 
+    private final Supplier<WebDriver> firefoxDriverSupplier = () -> {
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver(firefoxOptions(seleniumProxy()));
+        return driver;
+    };
+
     @Override
     protected void createDriver() {
         firefoxDriverSupplier.get();
@@ -36,12 +42,6 @@ public class FirefoxDriverManager extends DriverManager {
     protected void stopDriver() {
         SharedWebManager.stopDriver(driver);
     }
-
-    private final Supplier<WebDriver> firefoxDriverSupplier = () -> {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver(firefoxOptions(seleniumProxy()));
-        return driver;
-    };
 
     private static FirefoxOptions firefoxOptions(Proxy seleniumProxy) {
         FirefoxOptions firefoxOptions = new FirefoxOptions();

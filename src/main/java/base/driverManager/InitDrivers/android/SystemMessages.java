@@ -11,12 +11,11 @@ import java.util.List;
 public class SystemMessages extends Base {
 
     public boolean isGetSystemMessage(List<WebElement> popUp, WebElement approve) {
-        if (utilities.uiActions()
-                .webDriverWait(2, ExpectedConditions.visibilityOfAllElements(popUp), approve)) {
-            //utilities.uiActions().click(approve);
-            return true;
-        }
-        return false;
+        return utilities.uiActions().webDriverWait(
+                2,
+                ExpectedConditions.visibilityOfAllElements(popUp),
+                approve
+        );
     }
 
     public List<WebElement> alertActivity() {

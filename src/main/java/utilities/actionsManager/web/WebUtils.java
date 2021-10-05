@@ -7,18 +7,18 @@ import org.testng.Assert;
 import utilities.actionsManager.ActionsManager;
 import java.util.Optional;
 
+import static org.testng.Assert.fail;
+
 @Slf4j
 public class WebUtils extends ActionsManager {
 
     @Override
     public void click(WebElement element) {
-        utilities.uiActions().elementToBeClickable(element).ifPresent(e -> {
-            if (!(element.getText().isEmpty() || element.getText().isBlank())) {
-                log.info("about to click on : " + element.getText());
-            }
-            log.info("about to click on : " + element);
-            Optional.of(element).ifPresentOrElse(WebElement::click, Assert::fail);
-        });
+        utilities.uiActions().elementToBeClickable(element).ifPresentOrElse(e -> {
+            String text = element.getText() == null ? element.toString() : element.getText();
+            log.info("about to click on: " + text);
+            element.click();
+        }, Assert::fail);
     }
 
     @Override
@@ -26,7 +26,9 @@ public class WebUtils extends ActionsManager {
     public void clickOptional(WebElement element) {
         if (utilities.uiActions().elementToBeClickable(element).isPresent()
                 || utilities.uiActions().elementPresented(element,1).isPresent()) {
-            click(element);
+            String text = element.getText() == null ? element.toString() : element.getText();
+            log.info("about to click on: " + text);
+            element.click();
         }
     }
 
@@ -42,6 +44,6 @@ public class WebUtils extends ActionsManager {
     public void sendKeys(WebElement element, String keys) {
         if (utilities.uiActions().elementToBeClickable(element).isPresent()) {
             element.sendKeys(keys);
-        } else Assert.fail("fail send keys to " + element.toString());
+        } else fail("fail send keys to " + element.toString());
     }
 }

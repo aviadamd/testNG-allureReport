@@ -33,7 +33,6 @@ public class FactoryBaseTest extends Base {
         getDriver.set(driverManager.getDriver());
         driver = getDriver.get();
         new InitElementsManager().initElements(driver, getProperty.platformType);
-       // actions = ActionsManagerFactory.getActionsManager(getProperty.platform);
     }
 
     @AfterClass(description = "quit sessions")

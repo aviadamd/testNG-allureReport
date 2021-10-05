@@ -49,8 +49,13 @@ public class UiUtilitiesObjects extends Base implements WrapperObjects {
                     log.info(cast.getMessage() +  error);
                 } catch (Exception exception1) {
                     if (fail) {
-                        fail(ProjectsErrors.class, error, exception1,
-                                Reasons.GENERAL, Category.INTERNAL, Severity.HIGH);
+                        fail(ProjectsErrors.class,
+                                error,
+                                exception1,
+                                Reasons.GENERAL,
+                                Category.INTERNAL,
+                                Severity.HIGH
+                        );
                     }
                 }
             }
@@ -71,8 +76,41 @@ public class UiUtilitiesObjects extends Base implements WrapperObjects {
                     log.info(cast.getMessage());
                 } catch (Exception exception1) {
                     if (fail) {
-                        fail(ProjectsErrors.class, error, exception1,
-                                Reasons.GENERAL, Category.INTERNAL, Severity.HIGH);
+                        fail(ProjectsErrors.class,
+                                error,
+                                exception1,
+                                Reasons.GENERAL,
+                                Category.INTERNAL,
+                                Severity.HIGH
+                        );
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
+    @Description("wrapper")
+    public <A,B,E extends Exception> BiConsumer<A,B> wrapper(
+            BiConsumer<A,B> consumer, Class <E> clazz, boolean fail,
+            Reasons reasons, Category category, Severity severity) {
+        return (action1, action2) -> {
+            try {
+                consumer.accept(action1,action2);
+            } catch (Exception exception) {
+                log.info(exception.getMessage() +  error);
+                try {
+                    E cast = clazz.cast(exception);
+                    log.info(cast.getMessage());
+                } catch (Exception exception1) {
+                    if (fail) {
+                        fail(ProjectsErrors.class,
+                                error,
+                                exception1,
+                                reasons,
+                                category,
+                                severity
+                        );
                     }
                 }
             }

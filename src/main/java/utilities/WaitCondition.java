@@ -14,10 +14,11 @@ public enum WaitCondition {
     enabled(ExpectedConditions::elementToBeClickable);
     private final Function<WebElement, ExpectedCondition<WebElement>> type;
 
-//        WaitCondition(Function<WebElement, ExpectedCondition<WebElement>> type) {
-//        this.type = type;
-//    }
-//    public Function<WebElement, ExpectedCondition<WebElement>> getType() {
-//        return type;
-//    }
+    //old
+    //        WaitCondition(Function<WebElement, ExpectedCondition<WebElement>> type) {
+    //        this.type = type;
+    //    }
+    //    public Function<WebElement, ExpectedCondition<WebElement>> getType() {
+    //        return type;
+    //    }
 }

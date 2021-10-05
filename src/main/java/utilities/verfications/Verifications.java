@@ -61,7 +61,6 @@ public class Verifications extends Base {
         for (int i = 0; i < elements.size(); i++) {
             if (isTextEquals(elements.get(i), text.get(i))) {
                 log.debug("actual text " + elements.get(i).getText() + " equals expected test " + text.get(i));
-                return true;
             } else {
                 log.debug("actual text " + elements.get(i).getText() + " not equals expected test " + text.get(i));
             }
@@ -73,8 +72,8 @@ public class Verifications extends Base {
     @Description("is text equals")
     public boolean isTextEquals(WebElement actual, String expectedText) {
         load(actual);
-        String setActual = getString(actual.getText()).orElse("empty").trim();
-        String setExpected = getString(expectedText).orElse("empty").trim();
+        String setActual = getString(actual.getText()).orElse("empty");
+        String setExpected = getString(expectedText).orElse("empty");
         return  setActual.equals(setExpected) ||
                 setActual.contentEquals(setExpected) ||
                 setActual.contains(setExpected);

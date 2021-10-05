@@ -7,6 +7,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.ShareComponents;
+import utilities.errors.Category;
+import utilities.errors.Reasons;
+import utilities.errors.Severity;
 
 @Listeners(AllureListener.class)
 public class BookFlightTest extends FactoryBaseTest {
@@ -25,7 +28,7 @@ public class BookFlightTest extends FactoryBaseTest {
             action2.getLeft().enterUserDetails("selenium", "docker");
             action2.getLeft().enterUserCredentials("selenium", "docker");
             action2.getLeft().submit();
-        }, WebDriverException.class, true));
+        }, WebDriverException.class, true, Reasons.APP, Category.INTERNAL, Severity.HIGH));
     }
 
     @Test(priority = 2, dependsOnMethods = "registrationPage")
