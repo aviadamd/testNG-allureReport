@@ -18,7 +18,6 @@ public interface WrapperObjects {
     <A,B,E extends Exception> BiConsumer<A,B> wrapper(
             BiConsumer<A,B> consumer, Class <E> clazz, boolean fail);
 
-
     @Description("wrapper")
     <A,B,E extends Exception> BiConsumer<A,B> wrapper(
             BiConsumer<A,B> consumer, Class <E> clazz, boolean fail,

@@ -23,18 +23,18 @@ public class BookFlightTest extends FactoryBaseTest {
 
     @Test(priority = 1)
     public void registrationPage() {
-        shareComponents.shareComponents(utilities.wrapper((action1, action2) -> {
-            action2.getLeft().goTo(getProperty.url);
-            action2.getLeft().enterUserDetails("selenium", "docker");
-            action2.getLeft().enterUserCredentials("selenium", "docker");
-            action2.getLeft().submit();
-        }, WebDriverException.class, true, Reasons.APP, Category.INTERNAL, Severity.HIGH));
+       // shareComponents.shareComponents(utilities.wrapper((action1, action2) -> {
+          //  action2.getLeft().goTo(getProperty.url);
+           // action2.getLeft().enterUserDetails("selenium", "docker");
+          //  action2.getLeft().enterUserCredentials("selenium", "docker");
+          //  action2.getLeft().submit();
+        //}, WebDriverException.class, true, Reasons.APP, Category.INTERNAL, Severity.HIGH));
     }
 
     @Test(priority = 2, dependsOnMethods = "registrationPage")
     public void registrationConfirmationPage() {
-        shareComponents.shareComponents(utilities.wrapper((action1, action2) -> {
-            action2.getRight().goToFlightDetailsSignLink();
-        }, WebDriverException.class, true));
+        //shareComponents.shareComponents(utilities.wrapper((action1, action2) -> {
+          //  action2.getRight().goToFlightDetailsSignLink();
+       // }, WebDriverException.class, true));
     }
 }

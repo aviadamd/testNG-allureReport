@@ -1,14 +1,18 @@
 package test.flightPageRegistration.components;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Triple;
+import org.testng.annotations.Test;
 import test.FactoryBaseTest;
 import test.flightPageRegistration.FlightUi;
 import test.flightPageRegistration.pages.RegistrationPage;
 import utilities.UiUtilitiesObjects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @Slf4j
 public class RegistrationComponent extends FactoryBaseTest {
@@ -38,12 +42,12 @@ public class RegistrationComponent extends FactoryBaseTest {
        // chain.accept(new UiUtilitiesObjects(), new RegistrationPage(driver));
         utilities.sharedActions().click(flightUi.registrationPage.submitBtn);
     }
-
-    public RegistrationComponent registrations(String name, Consumer<Triple<RegistrationComponent,UiUtilitiesObjects, FlightUi>> testAction) {
-        log.info(name);
-        testAction.accept(Triple.of(new RegistrationComponent(),new UiUtilitiesObjects(), new FlightUi(driver)));
-        return new RegistrationComponent();
-    }
+//
+//    public RegistrationComponent registrations(String name, Consumer<Triple<RegistrationComponent,UiUtilitiesObjects, FlightUi>> testAction) {
+//        log.info(name);
+//        testAction.accept(Triple.of(new RegistrationComponent(),new UiUtilitiesObjects(), new FlightUi(driver)));
+//        return new RegistrationComponent();
+//    }
 
     public BiConsumer<UiUtilitiesObjects, RegistrationPage> verifyRegistrationPage = (action,page) -> {
         action.uiActions().elementPresented(page.usernameTxt,5);

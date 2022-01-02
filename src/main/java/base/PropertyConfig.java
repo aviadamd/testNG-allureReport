@@ -22,26 +22,31 @@ public class PropertyConfig {
     @SneakyThrows
     public PropertyConfig(String path) {
         properties = new Properties();
-        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + path);
-        properties.load(fileInputStream);
+        final String pathStr = System.getProperty("user.dir") + path;
 
-        platform = setProperties("platform");
-        platformType = setProperties("platformType");
-        remotePlatformType = setProperties("remotePlatformType");
-        url = setProperties("url");
-        localBin = setProperties("localBin");
-        androidSdk = setProperties("androidSdk");
-        nodeJs = setProperties("nodeJs");
-        appPath = setProperties("appPath");
-        hubHost = setProperties("hobHost");
-        mitProxyPath = setProperties("mitProxyPath");
-        isRunProxy = setProperties("isRunProxy");
-        fileInputStream.close();
+        try (FileInputStream fileInputStream = new FileInputStream(pathStr)) {
+            properties.load(fileInputStream);
+
+            platform = setProperties("platform");
+            platformType = setProperties("platformType");
+            remotePlatformType = setProperties("remotePlatformType");
+            url = setProperties("url");
+            localBin = setProperties("localBin");
+            androidSdk = setProperties("androidSdk");
+            nodeJs = setProperties("nodeJs");
+            appPath = setProperties("appPath");
+            hubHost = setProperties("hobHost");
+            mitProxyPath = setProperties("mitProxyPath");
+            isRunProxy = setProperties("isRunProxy");
+        }
     }
 
     private static String setProperties(String proName) {
-        if (System.getProperty(proName) != null)
-             return System.getProperty(proName);
-        else return properties.getProperty(proName);
+        if (System.getProperty(proName) != null) {
+            return System.getProperty(proName);
+        } else if (properties.getProperty(proName) != null) {
+            return properties.getProperty(proName);
+        }
+        throw new IllegalArgumentException(""+proName+" not exits in properties");
     }
 }

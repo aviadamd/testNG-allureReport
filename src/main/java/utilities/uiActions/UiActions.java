@@ -1,6 +1,6 @@
 package utilities.uiActions;
 
-import base.Base;
+import base.FactoryDriverInit;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
@@ -11,7 +11,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import utilities.WaitCondition;
@@ -20,33 +19,30 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Slf4j
-public class UiActions extends Base {
+public class UiActions extends FactoryDriverInit {
 
     @Description("element presented")
     public Optional<Boolean> elementPresented(WebElement element, int timeOut) {
-        return Optional.of(webDriverWait(
-                timeOut, ExpectedConditions.visibilityOf(element), element));
+        return Optional.of(webDriverWait(timeOut, ExpectedConditions.visibilityOf(element), element));
     }
 
     @Description("element to be clickable")
     public Optional<Boolean> elementToBeClickable(WebElement element) {
-       return Optional.of(webDriverWait(
-               10, ExpectedConditions.elementToBeClickable(element), element));
+       return Optional.of(webDriverWait(10, ExpectedConditions.elementToBeClickable(element), element));
     }
 
     @Description("wait for")
     private WebElement waitFor(WebElement element, WaitCondition condition) {
-        WebDriverWait driverWait = new WebDriverWait(driver,5);
+        WebDriverWait driverWait = new WebDriverWait(getDriver(),5);
         return driverWait.until(condition.getType().apply(element));
     }
 
     @Description("web driver wait")
     public <T> boolean webDriverWait(int timeOut, ExpectedCondition<T> conditions, WebElement element) {
         try {
-            new WebDriverWait(driver, timeOut).until(conditions.compose(driver -> {
+            new WebDriverWait(getDriver(), timeOut).until(conditions.compose(driver -> {
                 log.info("condition :" + element.getText() + conditions);
                 return null;
             }));
@@ -64,7 +60,7 @@ public class UiActions extends Base {
         try {
             imageScreenShot = new AShot()
                     .coordsProvider(new WebDriverCoordsProvider())
-                    .takeScreenshot(driver,imageElement);
+                    .takeScreenshot(driver, imageElement);
             ImageIO.write(imageScreenShot.getImage(),"png",
                     new File("./imageRepository/" + imageName));
         } catch (IOException ioException) {
@@ -80,18 +76,5 @@ public class UiActions extends Base {
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(5)))
                 .moveTo(PointOption.point(target.getX(), target.getY()))
                 .release().waitAction(WaitOptions.waitOptions(Duration.ofMillis(5)));
-    }
-
-    @Description("ui actions wrapper")
-    public Consumer<UiActions> uiActionsWrapper(Consumer<UiActions> uiActionsConsumer, boolean fail) {
-        return action -> {
-            try {
-                uiActionsConsumer.accept(new UiActions());
-            } catch (WebDriverException e) {
-                String error = "error from ui actions : ";
-                log.info(error + e.getMessage());
-                if (fail) Assert.fail(error + e.getMessage());
-            }
-        };
     }
 }
