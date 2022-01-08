@@ -11,14 +11,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
-import utilities.WaitCondition;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Optional;
+
+import static org.testng.Assert.fail;
 
 @Slf4j
 public class UiActions extends FactoryDriverInit {
@@ -31,12 +33,6 @@ public class UiActions extends FactoryDriverInit {
     @Description("element to be clickable")
     public Optional<Boolean> elementToBeClickable(WebElement element) {
        return Optional.of(webDriverWait(10, ExpectedConditions.elementToBeClickable(element), element));
-    }
-
-    @Description("wait for")
-    private WebElement waitFor(WebElement element, WaitCondition condition) {
-        WebDriverWait driverWait = new WebDriverWait(getDriver(),5);
-        return driverWait.until(condition.getType().apply(element));
     }
 
     @Description("web driver wait")
@@ -76,5 +72,35 @@ public class UiActions extends FactoryDriverInit {
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(5)))
                 .moveTo(PointOption.point(target.getX(), target.getY()))
                 .release().waitAction(WaitOptions.waitOptions(Duration.ofMillis(5)));
+    }
+
+    public void click(WebElement element) {
+        elementToBeClickable(element).ifPresentOrElse(e -> {
+            String text = element.getText() == null ? element.toString() : element.getText();
+            log.info("about to click on: " + text);
+            element.click();
+        }, Assert::fail);
+    }
+
+    @Description("click optional")
+    public void clickOptional(WebElement element) {
+        if (elementToBeClickable(element).isPresent() || elementPresented(element,1).isPresent()) {
+            String text = element.getText() == null ? element.toString() : element.getText();
+            log.info("about to click on: " + text);
+            element.click();
+        }
+    }
+
+    @Description("clear")
+    public void clear(WebElement element) {
+        click(element);
+        element.clear();
+    }
+
+    @Description("send keys")
+    public void sendKeys(WebElement element, String keys) {
+        if (elementToBeClickable(element).isPresent()) {
+            element.sendKeys(keys);
+        } else fail("fail send keys to " + element.toString());
     }
 }

@@ -4,11 +4,9 @@ import base.FactoryDriverInit;
 import io.qameta.allure.Description;
 import org.testng.annotations.BeforeClass;
 import test.accountManagement.AccountManagementUi;
-import test.flightPageRegistration.FlightUi;
 
 public class FactoryBaseTest extends FactoryDriverInit {
 
-    public static FlightUi flightUi;
     public static AccountManagementUi aManUi;
 
     /**
@@ -18,7 +16,6 @@ public class FactoryBaseTest extends FactoryDriverInit {
     @BeforeClass(description = "start sessions")
     @Description(value = "start session before test")
     public void initPages() {
-
         new InitElementsManager().initElements(driver, getProperty.platformType);
     }
 }

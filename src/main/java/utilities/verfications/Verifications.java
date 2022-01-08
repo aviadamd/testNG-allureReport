@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static utilities.actionsManager.web.SharedWebUtils.getString;
-
 @Slf4j
 public class Verifications extends Base {
 
@@ -72,11 +70,9 @@ public class Verifications extends Base {
     @Description("is text equals")
     public boolean isTextEquals(WebElement actual, String expectedText) {
         load(actual);
-        String setActual = getString(actual.getText()).orElse("empty");
-        String setExpected = getString(expectedText).orElse("empty");
-        return  setActual.equals(setExpected) ||
-                setActual.contentEquals(setExpected) ||
-                setActual.contains(setExpected);
+        return actual.getText().equals(expectedText) ||
+                actual.getText().contentEquals(expectedText) ||
+                actual.getText().contains(expectedText);
     }
 
 }
