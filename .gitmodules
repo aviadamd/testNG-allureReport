@@ -3,4 +3,4 @@
 	url = https://github.com/aviadamd/mobileBase.git
 [submodule "mobileBase"]
 	path = mobileBase
-	url = C:\\Users\\Lenovo\\IdeaProjects\\mobileBase
+	url = https://github.com/aviadamd/mobileBase.git
