@@ -21,5 +21,4 @@ public class AccountManagementLogin extends FactoryBaseTest {
     public void loginTest() {
         accountManagementLoginComponent.loadLoginPage();
     }
-
 }
