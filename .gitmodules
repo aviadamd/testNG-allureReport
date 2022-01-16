@@ -4,3 +4,6 @@
 [submodule "mobileBase"]
 	path = mobileBase
 	url = https://github.com/aviadamd/mobileBase.git
+[submodule "base"]
+	path = base
+	url = https://github.com/aviadamd/mobileBase.git
