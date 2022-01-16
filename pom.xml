@@ -8,6 +8,10 @@
     <artifactId>allureReport</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>base</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -148,6 +152,12 @@
             <groupId>io.appium</groupId>
             <artifactId>mitmproxy-java</artifactId>
             <version>${mitmproxy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mobile.base</groupId>
+            <artifactId>mobileBase</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
