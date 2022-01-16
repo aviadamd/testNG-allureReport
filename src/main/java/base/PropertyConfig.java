@@ -41,7 +41,7 @@ public class PropertyConfig {
         }
     }
 
-    private static String setProperties(String proName) {
+    public static String setProperties(String proName) {
         if (System.getProperty(proName) != null) {
             return System.getProperty(proName);
         } else if (properties.getProperty(proName) != null) {

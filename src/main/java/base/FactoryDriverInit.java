@@ -12,7 +12,6 @@ public class FactoryDriverInit extends Base {
 
     private DriverManager driverManager;
 
-    
     public WebDriver getDriver() {
         return driver;
     }
